@@ -28,7 +28,11 @@ def password_philosophy(low, high, letter, password):
             count += 1
     return high >= count >= low
 
+def password_philosophy_part_2(i, j, letter, password):
+    return (password[i] == letter) ^ (password[j] == letter)
+
 correct_password_count = 0
+correct_password_count_part_2 = 0
 with open("test_data.txt") as file:
     for line in file:
         freq, letter, password = line.split(" ")
@@ -37,4 +41,7 @@ with open("test_data.txt") as file:
         if password_philosophy(low, high, letter, password):
             correct_password_count += 1
 
-print(correct_password_count)
+        if password_philosophy_part_2(low - 1, high - 1, letter, password):
+            correct_password_count_part_2 += 1
+
+print(correct_password_count, correct_password_count_part_2)
